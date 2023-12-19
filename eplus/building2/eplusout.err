@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 8.5.0-c87e61b44b, YMD=2023.12.19 12:32,IDD_Version 8.5.0
+Program Version,EnergyPlus, Version 8.5.0-c87e61b44b, YMD=2023.12.19 12:36,IDD_Version 8.5.0
    ** Warning ** Version: in IDF="8.4" not the same as expected="8.5"
    ************* Beginning Zone Sizing Calculations
    ** Warning ** Calculated design heating load for zone=ZONE-VAV-129 is zero.

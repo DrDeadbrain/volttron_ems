@@ -1,7 +1,7 @@
 # Config parameters for setting up EnergyPlus agent
 properties:
     identity: platform.actuator
-    model: ~/Documents/repos/volttron_ems/eplus/building1/BUILDING1.idf
+    model: ~/Documents/repos/volttron_ems/eplus/building2/BUILDING2.idf
     weather: ~/Documents/repos/volttron_ems/eplus/USA_WA_Pasco-Tri.Cities.AP.727845_TMY3.epw
     bcvtb_home: ~/Documents/repos/volttron_ems/bcvtb
     size: 40960
@@ -2622,15 +2622,15 @@ outputs:
 #      type: Schedule Value
 #      default: CLGTEMPSETPOINT Zone-AHU-004
 
-    - sim_topic: operation
-      name: HVACOperationSchd
-      type: Schedule Value
-      field: operation
+#    - sim_topic: operation
+#      name: HVACOperationSchd
+#      type: Schedule Value
+#      field: operation
 
     -   sim_topic: Whole Building Power
         name: Whole Building
         type: Facility Total Electric Demand Power
-        topic: devices/PNNL/BUILDING1/METERS/all
+        topic: devices/PNNL/BUILDING2/METERS/all
         field: WholeBuildingPower
         publish_last: true
         meta:
@@ -2650,7 +2650,7 @@ inputs:
     - sim_topic: CLGTEMPSETPOINT Zone-VAV-102
       name: CLGTEMPSETPOINT Zone-VAV-102
       type: schedule
-      topic: PNNL/BUILDING1/AHU1/VAV102
+      topic: PNNL/BUILDING2/AHU1/VAV102
       field: ZoneCoolingTemperatureSetPoint
       default: 21.11
       dynamic_default: 1.0
