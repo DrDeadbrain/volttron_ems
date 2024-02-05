@@ -65,9 +65,9 @@ remote instance signed certificate into corresponding agent's agent-data directo
         # First check if instance_name is valid. If not report and exit. User need to update it before running
         # script again
 
-        if [ -f $volttron_home/config ]; then
+        if [ -f $volttron_home/influx.config ]; then
             # grab instance name from config and trim leading and trailing white spaces
-            name=`grep instance-name $volttron_home/config | cut -d "=" -f 2 | sed 's/^[ \t]*//;s/[ \t]*$//'`
+            name=`grep instance-name $volttron_home/influx.config | cut -d "=" -f 2 | sed 's/^[ \t]*//;s/[ \t]*$//'`
             if [[ ! $name =~ ^[a-z_]([a-z0-9_-]{1,23}|[a-z0-9_-]{1,23}\$)$ ]]; then
                 echo "ERROR"
                 echo "Instance name from... $volttron_home/config is $name"
@@ -193,20 +193,20 @@ remote instance signed certificate into corresponding agent's agent-data directo
     fi
 fi
 
-if [ -f $volttron_home/config ]; then
-    line=`grep agent-isolation-mode $volttron_home/config`
+if [ -f $volttron_home/influx.config ]; then
+    line=`grep agent-isolation-mode $volttron_home/influx.config`
     if [ -z "$line" ]; then
         # append to end of file
         echo "entry for agent-isolation-mode does not exists. appending to end of file"
-        echo "agent-isolation-mode = True" >> $volttron_home/config
+        echo "agent-isolation-mode = True" >> $volttron_home/influx.config
     else
         # replace false to true
-        sed -i 's/agent-isolation-mode = False/agent-isolation-mode = True/' $volttron_home/config
+        sed -i 's/agent-isolation-mode = False/agent-isolation-mode = True/' $volttron_home/influx.config
     fi
 else
-    echo "[volttron]" > $volttron_home/config
-    echo "agent-isolation-mode = True" >> $volttron_home/config
-    chown $volttron_user $volttron_home/config
+    echo "[volttron]" > $volttron_home/influx.config
+    echo "agent-isolation-mode = True" >> $volttron_home/influx.config
+    chown $volttron_user $volttron_home/influx.config
 fi
 
 script=${BASH_SOURCE[0]}
@@ -236,7 +236,7 @@ while true; do
                 read continue
                 if [ $continue == "N" ] || [ $continue == "n" ]; then
                     # write instance-name to config file
-                    echo "instance-name = $name" >> $volttron_home/config
+                    echo "instance-name = $name" >> $volttron_home/influx.config
                     echo "Volttron agent isolation mode setup is complete"
                     exit 0
                 else
@@ -254,7 +254,7 @@ while true; do
             echo "Setting Volttron instance name to $name"
             if [ -z "$name_from_config" ]; then
                 # write instance-name to config file
-                echo "instance-name = $name" >> $volttron_home/config
+                echo "instance-name = $name" >> $volttron_home/influx.config
             fi
             break
         fi

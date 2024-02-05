@@ -592,4 +592,3 @@ def test_vctl_start_stop_restart_should_not_fail_on_when_no_agents_are_installed
     with with_os_environ(volttron_instance.env):            
         execute_command(["vctl", subcommand, valid_option], volttron_instance.env)
         assert not jsonapi.loads(execute_command(["vctl", "--json", "status"], volttron_instance.env))
-        

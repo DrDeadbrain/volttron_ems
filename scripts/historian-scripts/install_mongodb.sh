@@ -106,7 +106,7 @@ printf "\n#Entries added by install_mongodb script - STOP\n" >> ~/.bashrc
 echo "test"
 printf "\n##Starting mongodb....\n"
 export PATH=$install_path/bin/:\$PATH
-$install_path/bin/mongod --config $config_file &
+$install_path/bin/mongod --influx.config $config_file &
 /bin/sleep 5
 
 

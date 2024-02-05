@@ -547,7 +547,7 @@ def test_log_topic_no_header(publish_agent, query_agent):
 @pytest.mark.forwarder
 def test_old_config(volttron_instances, forwarder):
     """
-    Test adding 'agentid' and 'identity' to config. identity should be 
+    Test adding 'agentid' and 'identity' to config. identity should be
     supported with "deprecated warning" and "agentid" should get ignored with a
     warning message
     """
