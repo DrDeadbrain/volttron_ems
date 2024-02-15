@@ -4,7 +4,7 @@ MAIN_MODULE = 'agent'
 
 # Find the agent package that contains the main module
 packages = find_packages('.')
-agent_package = 'lei'
+agent_package = 'microgrid'
 
 # Find the version number from the main module
 agent_module = agent_package + '.' + MAIN_MODULE
@@ -16,8 +16,7 @@ setup(
     name=agent_package + 'agent',
     version=__version__,
     author="christian caus",
-    author_email="christiancaus@gmail.com",
-    description="Agent that simulates a energy producer and delivers dummy data for the needed energy for buildings and aggregates the total energy consumption of all buildings in the simulated neighbourhood",
+    description="Agent that represents a microgrid with multiple generators for electric energy and storage capabilities",
     install_requires=['volttron'],
     packages=packages,
     entry_points={

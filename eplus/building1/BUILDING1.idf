@@ -55,7 +55,7 @@ HeatBalanceAlgorithm,ConductionTransferFunction;
 
 !-   ===========  ALL OBJECTS IN CLASS: TIMESTEP ===========
 
-  Timestep,60;
+  Timestep,1;
 
 !-   ===========  ALL OBJECTS IN CLASS: SITE:LOCATION ===========
 
@@ -136,10 +136,10 @@ SizingPeriod:DesignDay,
 
 RunPeriod,
     Typical Summer Week,     !- Name
-    8,                       !- Begin Month
+    6,                       !- Begin Month
     1,                       !- Begin Day of Month
-    8,                      !- End Month
-    31,                      !- End Day of Month
+    6,                      !- End Month
+    1,                      !- End Day of Month
     Monday,                  !- Day of Week for Start Day
     No,                      !- Use Weather File Holidays and Special Days
     No,                      !- Use Weather File Daylight Saving Period

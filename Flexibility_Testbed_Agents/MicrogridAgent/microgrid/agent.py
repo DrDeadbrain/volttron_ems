@@ -5,7 +5,6 @@ Agent documentation goes here.
 __docformat__ = 'reStructuredText'
 
 import logging
-from pprint import pformat
 import sys
 from volttron.platform.agent import utils
 from volttron.platform.vip.agent import Agent, Core, RPC
@@ -15,15 +14,15 @@ utils.setup_logging()
 __version__ = "0.1"
 
 
-def lei(config_path, **kwargs):
+def microgrid(config_path, **kwargs):
     """
     Parses the Agent configuration and returns an instance of
     the agent created using that configuration.
 
     :param config_path: Path to a configuration file.
     :type config_path: str
-    :returns: Lei
-    :rtype: Lei
+    :returns: Microgrid
+    :rtype: Microgrid
     """
     try:
         config = utils.load_config(config_path)
@@ -36,21 +35,20 @@ def lei(config_path, **kwargs):
     setting1 = int(config.get('setting1', 1))
     setting2 = config.get('setting2', "some/random/topic")
 
-    return Lei(setting1, setting2, **kwargs)
+    return Microgrid(setting1, setting2, **kwargs)
 
 
-class Lei(Agent):
+class Microgrid(Agent):
     """
     Document agent constructor here.
     """
 
     def __init__(self, setting1=1, setting2="some/random/topic", **kwargs):
-        super(Lei, self).__init__(**kwargs)
+        super(Microgrid, self).__init__(**kwargs)
         _log.debug("vip_identity: " + self.core.identity)
 
         self.setting1 = setting1
         self.setting2 = setting2
-        self.energy_array = [[]]
 
         self.default_config = {"setting1": setting1,
                                "setting2": setting2}
@@ -100,35 +98,7 @@ class Lei(Agent):
         """
         Callback triggered by the subscription setup using the topic from the agent's config file
         """
-        print(
-            "Peer: {0}, Sender: {1}:, Bus: {2}, Topic: {3}, Headers: {4}, "
-            "Message: \n{5}".format(peer, sender, bus, topic, headers, pformat(message))
-        )
         pass
-
-    # def process_message(self, peer, sender, bus, topic, headers, message):
-    #     """
-    #     Method that processes the incoming pupsub message from the message bus and stores the sender and it's
-    #     corresponding value into an array.
-    #     If the sender is already part of the array it simply updates the value.
-    #     :param peer: pubsub
-    #     :param sender: building agent
-    #     :param bus: zmq message bus
-    #     :param topic: internal/buildingpower/all
-    #     :param headers: versions
-    #     :param message: Building Power
-    #     :return: array[[]]
-    #     """
-    #     parts = message.split(':')
-    #     if len(parts) == 2:
-    #         value = parts[1].strip()
-    #     else:
-    #         print("Invalid message")
-    #
-    #     if sender not in self.energy_array:
-    #         self.energy_array[0].append(sender)
-    #     else:
-    #         self.energy_array[sender] = 1
 
     @Core.receiver("onstart")
     def onstart(self, sender, **kwargs):
@@ -167,7 +137,7 @@ class Lei(Agent):
 
 def main():
     """Main method called to start the agent."""
-    utils.vip_main(lei, 
+    utils.vip_main(microgrid, 
                    version=__version__)
 
 

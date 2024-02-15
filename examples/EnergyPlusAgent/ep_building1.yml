@@ -5,12 +5,12 @@ properties:
     weather: ~/Documents/repos/volttron_ems/eplus/USA_WA_Pasco-Tri.Cities.AP.727845_TMY3.epw
     bcvtb_home: ~/Documents/repos/volttron_ems/bcvtb
     size: 40960
-    startmonth: 1
+    startmonth: 6
     startday: 1
-    endmonth: 12
-    endday: 31
-    timestep: 60
-    time_scale: 6
+    endmonth: 6
+    endday: 1
+    timestep: 1
+    time_scale: 600
     cosimulation_sync: true
     real_time_periodic: true
     co_sim_timestep: 5

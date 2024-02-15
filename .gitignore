@@ -52,21 +52,9 @@ rabbitmq-server.download.tar.xz
 .rdd
 .shd
 .sql
-.audit
-.bnd
-.dxf
 .edd
-.eio
-.end
-.err
-.eso
-.mdd
-.mtd
-.mtr
-.rdd
-.shd
-.sql
-.csv
 .cfg
 .log
+eplusout.*
 
+/eplus/

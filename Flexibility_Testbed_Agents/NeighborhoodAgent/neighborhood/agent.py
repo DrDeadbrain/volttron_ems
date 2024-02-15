@@ -9,21 +9,20 @@ import sys
 from volttron.platform.agent import utils
 from volttron.platform.vip.agent import Agent, Core, RPC
 
-
 _log = logging.getLogger(__name__)
 utils.setup_logging()
 __version__ = "0.1"
 
 
-def ecc(config_path, **kwargs):
+def neighborhood(config_path, **kwargs):
     """
     Parses the Agent configuration and returns an instance of
     the agent created using that configuration.
 
     :param config_path: Path to a configuration file.
     :type config_path: str
-    :returns: Ecc
-    :rtype: Ecc
+    :returns: Neighborhood
+    :rtype: Neighborhood
     """
     try:
         config = utils.load_config(config_path)
@@ -36,16 +35,16 @@ def ecc(config_path, **kwargs):
     setting1 = int(config.get('setting1', 1))
     setting2 = config.get('setting2', "some/random/topic")
 
-    return Ecc(setting1, setting2, **kwargs)
+    return Neighborhood(setting1, setting2, **kwargs)
 
 
-class Ecc(Agent):
+class Neighborhood(Agent):
     """
     Document agent constructor here.
     """
 
     def __init__(self, setting1=1, setting2="some/random/topic", **kwargs):
-        super(Ecc, self).__init__(**kwargs)
+        super(Neighborhood, self).__init__(**kwargs)
         _log.debug("vip_identity: " + self.core.identity)
 
         self.setting1 = setting1
@@ -138,7 +137,7 @@ class Ecc(Agent):
 
 def main():
     """Main method called to start the agent."""
-    utils.vip_main(ecc, 
+    utils.vip_main(neighborhood, 
                    version=__version__)
 
 
