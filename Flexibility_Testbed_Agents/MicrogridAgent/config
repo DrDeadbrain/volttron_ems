@@ -1,10 +1,17 @@
 {
   # VOLTTRON config files are JSON with support for python style comments.
   "setting1": 2, # Integers
-  "setting2": "some/random/topic2", #Strings
-  "setting3": true, # Booleans: remember that in JSON true and false are not capitalized.
-  "setting4": false,
-  "setting5": 5.1, # Floating point numbers.
-  "setting6": [1,2,3,4], #Lists
-  "setting7": {"setting7a": "a", "setting7b": "b"} # Objects
+  "setting2": "neighborhood/totalEnergy", #Topic to subscribe
+  "setting3": "microgrid/data", #Topic for publish
+  "setting4": 'hourly', #time_resolution ('hourly' or '15-min')
+  "setting5": 3000, #solar_capacity (int: default ??)
+  "setting6": 3000, #wind_capacity (int: default ??)
+  "setting7": 3000, #chp_capacity (int: default ??)
+  "setting8": 100000, #battery_capacity (int: default ??) kWh
+  "setting9": 0.9, #battery_efficiency (float: default 0.9)
+  "setting10": 5000, #thermal_storage_capacity (int: default 100)
+  "setting11": 0.85, #thermal_storage_efficiency (float: default 0.85)
+  "setting12": true, #use_solar (boolean)
+  "setting13": true, #use_wind (boolean)
+  "setting14": true  #use_chp (boolean)
 }

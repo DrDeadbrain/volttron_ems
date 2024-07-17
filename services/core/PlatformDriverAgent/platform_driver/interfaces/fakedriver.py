@@ -1,51 +1,14 @@
-# -*- coding: utf-8 -*- {{{
-# vim: set fenc=utf-8 ft=python sw=4 ts=4 sts=4 et:
-#
-# Copyright 2020, Battelle Memorial Institute.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-# This material was prepared as an account of work sponsored by an agency of
-# the United States Government. Neither the United States Government nor the
-# United States Department of Energy, nor Battelle, nor any of their
-# employees, nor any jurisdiction or organization that has cooperated in the
-# development of these materials, makes any warranty, express or
-# implied, or assumes any legal liability or responsibility for the accuracy,
-# completeness, or usefulness or any information, apparatus, product,
-# software, or process disclosed, or represents that its use would not infringe
-# privately owned rights. Reference herein to any specific commercial product,
-# process, or service by trade name, trademark, manufacturer, or otherwise
-# does not necessarily constitute or imply its endorsement, recommendation, or
-# favoring by the United States Government or any agency thereof, or
-# Battelle Memorial Institute. The views and opinions of authors expressed
-# herein do not necessarily state or reflect those of the
-# United States Government or any agency thereof.
-#
-# PACIFIC NORTHWEST NATIONAL LABORATORY operated by
-# BATTELLE for the UNITED STATES DEPARTMENT OF ENERGY
-# under Contract DE-AC05-76RL01830
-# }}}
-
-
 import random
 import datetime
 import math
 from math import pi
 
-from platform_driver.interfaces import BaseInterface, BaseRegister, BasicRevert
+
 from csv import DictReader
 from io import StringIO
 import logging
+
+from services.core.PlatformDriverAgent.platform_driver.interfaces import BaseRegister, BasicRevert, BaseInterface
 
 _log = logging.getLogger(__name__)
 type_mapping = {"string": str,
@@ -58,13 +21,14 @@ type_mapping = {"string": str,
 
 class FakeRegister(BaseRegister):
     def __init__(self, read_only, pointName, units, reg_type,
-                 default_value=None, description=''):
-        #     register_type, read_only, pointName, units, description = ''):
+                 default_value=None, description='', datetime_value=None):
         super(FakeRegister, self).__init__("byte", read_only, pointName, units,
                                            description='')
         self.reg_type = reg_type
 
-        if default_value is None:
+        if pointName.lower() == "datetime":
+            self.value = datetime_value
+        elif default_value is None:
             self.value = self.reg_type(random.uniform(0, 100))
         else:
             try:
@@ -112,7 +76,6 @@ class Interface(BasicRevert, BaseInterface):
 
     def get_point(self, point_name):
         register = self.get_register_by_name(point_name)
-
         return register.value
 
     def _set_point(self, point_name, value):
@@ -137,7 +100,6 @@ class Interface(BasicRevert, BaseInterface):
         if configDict is None:
             return
 
-
         for regDef in configDict:
             # Skip lines that have no address yet.
             if not regDef['Point Name']:
@@ -153,6 +115,8 @@ class Interface(BasicRevert, BaseInterface):
             type_name = regDef.get("Type", 'string')
             reg_type = type_mapping.get(type_name, str)
 
+            datetime_value = regDef.get("DateTime", None)
+
             register_type = FakeRegister if not point_name.startswith('EKG') else EKGregister
 
             register = register_type(
@@ -161,7 +125,8 @@ class Interface(BasicRevert, BaseInterface):
                 units,
                 reg_type,
                 default_value=default_value,
-                description=description)
+                description=description,
+                datetime_value=datetime_value)
 
             if default_value is not None:
                 self.set_default(point_name, register.value)

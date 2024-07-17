@@ -55,7 +55,7 @@ HeatBalanceAlgorithm,ConductionTransferFunction;
 
 !-   ===========  ALL OBJECTS IN CLASS: TIMESTEP ===========
 
-  Timestep,1;
+  Timestep,60;
 
 !-   ===========  ALL OBJECTS IN CLASS: SITE:LOCATION ===========
 

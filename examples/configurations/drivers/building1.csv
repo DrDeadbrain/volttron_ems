@@ -1,0 +1,6 @@
+Point Name,Volttron Point Name,Units,read_only,Starting Value,Type
+Building1_Pel,Building1_Pel,kW,False,3467.6334989387765,Type
+Building1_Pel,Building1_Pel,kW,False,3565.143529254838,Type
+Building1_Pel,Building1_Pel,kW,False,3422.618918412699,Type
+Building1_Pel,Building1_Pel,kW,False,3415.4388833177018,Type
+Building1_Pel,Building1_Pel,kW,False,3459.04181512182,Type

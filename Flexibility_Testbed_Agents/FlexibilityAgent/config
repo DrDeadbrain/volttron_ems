@@ -1,0 +1,10 @@
+{
+  # VOLTTRON config files are JSON with support for python style comments.
+  "setting1": 2, # Integers
+  "setting2": "neighborhood/totalEnergy", #topic 1 subscription
+  "setting3": "microgrid/data", #topic 2 subscription
+  "setting4": false,
+  "setting5": 5.1, # Floating point numbers.
+  "setting6": [1,2,3,4], #Lists
+  "setting7": {"setting7a": "a", "setting7b": "b"} # Objects
+}
